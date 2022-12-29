@@ -5,12 +5,12 @@ class CompanyModel extends CompanyEntity {
     required id,
     required name,
     required description,
-    required indastry,
+    required industry,
   }) : super(
           id: id,
           name: name,
           description: description,
-          indastry: indastry,
+          industry: industry,
         );
 
   factory CompanyModel.fromJson(Map<String, dynamic> json) {
@@ -18,7 +18,7 @@ class CompanyModel extends CompanyEntity {
         id: json['id'],
         name: json['name'],
         description: json['description'],
-        indastry: json['indastry']);
+        industry: json['industry']);
   }
 
   Map<String, dynamic> toJson() {
@@ -26,7 +26,7 @@ class CompanyModel extends CompanyEntity {
       'id': id,
       'name': name,
       'description': description,
-      'indastry': indastry,
+      'industry': industry,
     };
   }
 }

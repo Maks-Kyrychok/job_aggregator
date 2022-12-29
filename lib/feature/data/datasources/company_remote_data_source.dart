@@ -32,10 +32,9 @@ class CompanyRemoteDataSourceImpl implements CompanyRemoteDataSource {
     final response =
         await client.get(Uri.parse('http://3.75.134.87/flutter/v1/companies'));
     if (response.statusCode == 200) {
-      final companies = json.decode(response.body);
-      return (companies as List)
-          .map((company) => CompanyModel.fromJson(company))
-          .toList();
+      Map<String, dynamic> map = json.decode(response.body);
+      List<dynamic> companies = map["result"];
+      return (companies).map((data) => CompanyModel.fromJson(data)).toList();
     } else {
       throw ServerExeption();
     }
