@@ -26,9 +26,9 @@ class CompanyListCubit extends Cubit<CompanyState> {
     ));
 
     final failureOrCompany = await getAllCompanies(PageCompanyParams());
-    failureOrCompany
-        .fold((error) => CompanyError(message: _mapFailureToMessage(error)),
-            (company) {
+    failureOrCompany.fold(
+        (error) => emit(CompanyError(message: _mapFailureToMessage(error))),
+        (company) {
       final companies = (state as CompanyLoading).oldCompaniesList;
       companies.addAll(company);
       emit(CompanyLoaded(company));
