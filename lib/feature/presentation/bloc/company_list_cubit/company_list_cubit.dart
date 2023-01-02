@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/animation.dart';
 import 'package:job_aggregator/core/error/failure.dart';
 import 'package:job_aggregator/feature/domain/usecases/get_all_companies.dart';
 

@@ -1,49 +1,49 @@
 import 'dart:async';
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:job_aggregator/feature/presentation/bloc/company_list_cubit/company_list_state.dart';
+import 'package:job_aggregator/feature/presentation/widgets/job_card_widget.dart';
 
-import '../../domain/entities/company_entity.dart';
-import '../bloc/company_list_cubit/company_list_cubit.dart';
-import 'company_card_widget.dart';
+import '../../domain/entities/job_entity.dart';
+import '../bloc/job_list_cubit/job_list_cubit.dart';
+import '../bloc/job_list_cubit/job_list_state.dart';
 
-class CompaniesList extends StatelessWidget {
+class JobsList extends StatelessWidget {
   final scrollController = ScrollController();
+
+  JobsList({super.key});
 
   void setupScrollController(BuildContext context) {
     scrollController.addListener(() {
       if (scrollController.position.atEdge) {
         if (scrollController.position.pixels != 0) {
-          context.read<CompanyListCubit>().loadCompany();
+          context.read<JobListCubit>().loadJob();
         }
       }
     });
   }
 
-  CompaniesList({super.key});
 
   @override
   Widget build(BuildContext context) {
     setupScrollController(context);
-    return BlocBuilder<CompanyListCubit, CompanyState>(
+    return BlocBuilder<JobListCubit, JobState>(
       builder: (context, state) {
-        List<CompanyEntity> companies = [];
+        List<JobEntity> jobs = [];
         bool isLoading = false;
-        if (state is CompanyLoading) {
+        if (state is JobLoading) {
           return _loadingIndicator();
-        } else if (state is CompanyLoading) {
-          companies = state.oldCompaniesList;
+        } else if (state is JobLoading) {
+          jobs = state.oldJobList;
           isLoading == true;
-        } else if (state is CompanyLoaded) {
-          companies = state.companiesList;
+        } else if (state is JobLoaded) {
+          jobs = state.jobsList;
         }
         return ListView.separated(
             controller: scrollController,
             itemBuilder: (context, index) {
-              if (index < companies.length) {
-                return CompanyCard(company: companies[index]);
+              if (index < jobs.length) {
+                return JobCard(jobs: jobs[index]);
               } else {
                 Timer(const Duration(milliseconds: 30), () {
                   scrollController
@@ -56,7 +56,7 @@ class CompaniesList extends StatelessWidget {
               return Divider(color: Colors.grey[400]);
             },
             // ignore: dead_code
-            itemCount: companies.length + (isLoading ? 1 : 0));
+            itemCount: jobs.length + (isLoading ? 1 : 0));
       },
     );
   }
