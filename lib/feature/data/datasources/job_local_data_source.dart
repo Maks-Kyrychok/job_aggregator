@@ -24,11 +24,10 @@ class JobLocalDataSourceImpl implements JobLocalDataSource {
   JobLocalDataSourceImpl({required this.sharedPreferences});
 
   @override
-  Future<void> jobsToCache(List<JobModel> companies) {
+  Future jobsToCache(List<JobModel> companies) {
     final List<String> jsonCompaniesList =
         companies.map((company) => jsonEncode(company.toJson())).toList();
     sharedPreferences.setStringList(CACHED_JOB_LIST, jsonCompaniesList);
-    print('Company to write Cache: ${jsonCompaniesList.length}');
     return Future.value(jsonCompaniesList);
   }
 

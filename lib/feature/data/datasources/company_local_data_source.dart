@@ -22,11 +22,10 @@ class CompanyLocalDataSourceImpl implements CompanyLocalDataSource {
   CompanyLocalDataSourceImpl({required this.sharedPreferences});
 
   @override
-  Future<void> companiesToCache(List<CompanyModel> companies) {
+  Future companiesToCache(List<CompanyModel> companies) {
     final List<String> jsonCompaniesList =
         companies.map((company) => jsonEncode(company.toJson())).toList();
     sharedPreferences.setStringList(CACHED_COMPANY_LIST, jsonCompaniesList);
-    print('Company to write Cache: ${jsonCompaniesList.length}');
     return Future.value(jsonCompaniesList);
   }
 

@@ -26,7 +26,7 @@ class CompanyLoading extends CompanyState {
 class CompanyLoaded extends CompanyState {
   final List<CompanyEntity> companiesList;
 
-  CompanyLoaded(this.companiesList);
+  const CompanyLoaded(this.companiesList);
 
   @override
   List<Object?> get props => [companiesList];
@@ -35,7 +35,7 @@ class CompanyLoaded extends CompanyState {
 class CompanyError extends CompanyState {
   final String message;
 
-  CompanyError({required this.message});
+  const CompanyError({required this.message});
 
   @override
   List<Object?> get props => [message];

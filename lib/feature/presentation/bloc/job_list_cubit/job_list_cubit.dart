@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:job_aggregator/core/error/failure.dart';
-import 'package:job_aggregator/feature/domain/usecases/get_all_companies.dart';
 import 'package:job_aggregator/feature/domain/usecases/get_all_jobs.dart';
 
 import '../../../domain/entities/job_entity.dart';
